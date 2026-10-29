@@ -1,0 +1,9 @@
+# Build output (CMake presets put everything under build/)
+build/
+out/
+.vs/
+CMakeUserPresets.json
+
+# Python
+__pycache__/
+*.pyc

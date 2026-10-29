@@ -1,0 +1,8 @@
+{
+  "name": "aesni-bench",
+  "version-string": "0.1.0",
+  "description": "Benchmark of AES-256-GCM with/without AES-NI vs ChaCha20-Poly1305 using OpenSSL 3 EVP",
+  "dependencies": [
+    "openssl"
+  ]
+}
