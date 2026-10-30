@@ -7,6 +7,12 @@
 
 $ErrorActionPreference = 'Stop'
 
+# Also search the PATH saved in Windows settings, so tools installed after this
+# terminal was opened (e.g. Git) are still found. Appended, so it never
+# changes which program wins when one is already on PATH.
+$env:Path = $env:Path + ';' + [Environment]::GetEnvironmentVariable('Path', 'Machine') +
+            ';' + [Environment]::GetEnvironmentVariable('Path', 'User')
+
 $RepoRoot   = Split-Path -Parent $PSScriptRoot
 # Build output lives OUTSIDE the repo, in %LOCALAPPDATA%, because the repo is
 # in OneDrive: syncing hundreds of MB of OpenSSL build files would slow
@@ -14,7 +20,8 @@ $RepoRoot   = Split-Path -Parent $PSScriptRoot
 $BuildDir   = Join-Path $env:LOCALAPPDATA 'aesni-bench\build\x64-release'   # Release x64 only
 $BenchExe   = Join-Path $BuildDir 'bench.exe'
 $KatExe     = Join-Path $BuildDir 'kat.exe'
-# vcpkg installs OpenSSL (libraries AND the openssl.exe command-line tool) here.
+# vcpkg installs OpenSSL here: the libraries, and (because vcpkg.json asks for
+# the "tools" feature) the openssl.exe command-line program.
 $VcpkgInstalled = Join-Path $BuildDir 'vcpkg_installed\x64-windows'
 $OpenSslExe = Join-Path $VcpkgInstalled 'tools\openssl\openssl.exe'
 $ResultsDir = Join-Path $RepoRoot 'results'
