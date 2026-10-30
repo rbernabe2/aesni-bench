@@ -1,0 +1,361 @@
+run_all.ps1 started 10/29/2026 17:28:49  trials=3 pin=-1 minSeconds=0.5 armoury=Performance
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=aesni_on cipher=aes-256-gcm size=1KB (1024 bytes) trials=3
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 603087 ops in 0.250 s -> 1206174 iterations per trial
+  trial  1/3:    2747.11 MB/s         0.373 us/op  cpu  97.3%  peak      8.4 MB  verify PASS
+  trial  2/3:    2612.25 MB/s         0.392 us/op  cpu  99.1%  peak      9.4 MB  verify PASS
+  trial  3/3:    2699.45 MB/s         0.379 us/op  cpu  99.0%  peak      9.5 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=aesni_on cipher=aes-256-gcm size=16KB (16384 bytes) trials=3
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 90120 ops in 0.250 s -> 180239 iterations per trial
+  trial  1/3:    5852.30 MB/s         2.800 us/op  cpu  96.0%  peak      8.4 MB  verify PASS
+  trial  2/3:    5991.49 MB/s         2.735 us/op  cpu  98.3%  peak      9.4 MB  verify PASS
+  trial  3/3:    6005.62 MB/s         2.728 us/op  cpu  95.3%  peak      9.5 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=aesni_on cipher=aes-256-gcm size=256KB (262144 bytes) trials=3
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 6447 ops in 0.250 s -> 12894 iterations per trial
+  trial  1/3:    6752.70 MB/s        38.821 us/op  cpu  93.6%  peak      8.9 MB  verify PASS
+  trial  2/3:    6553.35 MB/s        40.002 us/op  cpu  96.9%  peak      9.9 MB  verify PASS
+  trial  3/3:    6591.82 MB/s        39.768 us/op  cpu 100.6%  peak      9.9 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=aesni_on cipher=aes-256-gcm size=1MB (1048576 bytes) trials=3
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 1586 ops in 0.250 s -> 3171 iterations per trial
+  trial  1/3:    6463.39 MB/s       162.233 us/op  cpu  91.1%  peak     10.4 MB  verify PASS
+  trial  2/3:    6653.63 MB/s       157.595 us/op  cpu 100.1%  peak     11.4 MB  verify PASS
+  trial  3/3:    6559.73 MB/s       159.850 us/op  cpu  98.6%  peak     11.5 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=aesni_on cipher=aes-256-gcm size=64MB (67108864 bytes) trials=3
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 24 ops in 0.252 s -> 48 iterations per trial
+  trial  1/3:    6551.93 MB/s     10242.617 us/op  cpu 101.7%  peak    136.4 MB  verify PASS
+  trial  2/3:    6512.53 MB/s     10304.569 us/op  cpu  94.8%  peak    137.4 MB  verify PASS
+  trial  3/3:    6458.68 MB/s     10390.487 us/op  cpu  94.0%  peak    137.5 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=aesni_on cipher=aes-256-gcm size=1GB (1073741824 bytes) trials=3
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 2 ops in 0.337 s -> 3 iterations per trial
+  trial  1/3:    6334.03 MB/s    169519.567 us/op  cpu  98.3%  peak   2056.4 MB  verify PASS
+  trial  2/3:    6040.32 MB/s    177762.433 us/op  cpu  99.6%  peak   2057.4 MB  verify PASS
+  trial  3/3:    6569.68 MB/s    163438.967 us/op  cpu  95.6%  peak   2057.5 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : ~0x200000200000000:~0x60000000000:~0x0  (OpenSSL told to ignore the masked CPU features)
+Config          : label=aesni_off cipher=aes-256-gcm size=1KB (1024 bytes) trials=3
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 37738 ops in 0.250 s -> 75476 iterations per trial
+  trial  1/3:     161.06 MB/s         6.358 us/op  cpu 100.9%  peak      8.4 MB  verify PASS
+  trial  2/3:     158.12 MB/s         6.476 us/op  cpu  99.1%  peak      9.4 MB  verify PASS
+  trial  3/3:     155.80 MB/s         6.573 us/op  cpu  97.6%  peak      9.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : ~0x200000200000000:~0x60000000000:~0x0  (OpenSSL told to ignore the masked CPU features)
+Config          : label=aesni_off cipher=aes-256-gcm size=16KB (16384 bytes) trials=3
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 2637 ops in 0.250 s -> 5273 iterations per trial
+  trial  1/3:     162.77 MB/s       100.660 us/op  cpu  97.1%  peak      8.4 MB  verify PASS
+  trial  2/3:     170.57 MB/s        96.055 us/op  cpu  98.7%  peak      9.4 MB  verify PASS
+  trial  3/3:     168.17 MB/s        97.428 us/op  cpu  97.3%  peak      9.5 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : ~0x200000200000000:~0x60000000000:~0x0  (OpenSSL told to ignore the masked CPU features)
+Config          : label=aesni_off cipher=aes-256-gcm size=256KB (262144 bytes) trials=3
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 166 ops in 0.251 s -> 331 iterations per trial
+  trial  1/3:     174.05 MB/s      1506.170 us/op  cpu 100.3%  peak      8.9 MB  verify PASS
+  trial  2/3:     170.74 MB/s      1535.363 us/op  cpu  92.2%  peak      9.9 MB  verify PASS
+  trial  3/3:     170.38 MB/s      1538.580 us/op  cpu 101.2%  peak      9.9 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : ~0x200000200000000:~0x60000000000:~0x0  (OpenSSL told to ignore the masked CPU features)
+Config          : label=aesni_off cipher=aes-256-gcm size=1MB (1048576 bytes) trials=3
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 42 ops in 0.251 s -> 84 iterations per trial
+  trial  1/3:     176.73 MB/s      5933.339 us/op  cpu  97.2%  peak     10.4 MB  verify PASS
+  trial  2/3:     170.52 MB/s      6149.389 us/op  cpu  93.8%  peak     11.4 MB  verify PASS
+  trial  3/3:     171.89 MB/s      6100.354 us/op  cpu  97.6%  peak     11.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : ~0x200000200000000:~0x60000000000:~0x0  (OpenSSL told to ignore the masked CPU features)
+Config          : label=aesni_off cipher=aes-256-gcm size=64MB (67108864 bytes) trials=3
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 1 ops in 0.388 s -> 2 iterations per trial
+  trial  1/3:     169.04 MB/s    397009.650 us/op  cpu  98.4%  peak    136.4 MB  verify PASS
+  trial  2/3:     170.92 MB/s    392623.850 us/op  cpu  97.5%  peak    137.4 MB  verify PASS
+  trial  3/3:     170.72 MB/s    393085.050 us/op  cpu  97.4%  peak    137.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : ~0x200000200000000:~0x60000000000:~0x0  (OpenSSL told to ignore the masked CPU features)
+Config          : label=aesni_off cipher=aes-256-gcm size=1GB (1073741824 bytes) trials=3
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 1 ops in 6.194 s -> 1 iterations per trial
+  trial  1/3:     171.73 MB/s   6252571.500 us/op  cpu  95.7%  peak   2056.4 MB  verify PASS
+  trial  2/3:     171.49 MB/s   6261284.300 us/op  cpu  99.3%  peak   2057.4 MB  verify PASS
+  trial  3/3:     170.44 MB/s   6299869.200 us/op  cpu  97.0%  peak   2057.5 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=chacha_on cipher=chacha20-poly1305 size=1KB (1024 bytes) trials=3
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 235984 ops in 0.250 s -> 471968 iterations per trial
+  trial  1/3:    1026.45 MB/s         0.998 us/op  cpu  96.2%  peak      8.4 MB  verify PASS
+  trial  2/3:    1045.59 MB/s         0.979 us/op  cpu  98.0%  peak      9.4 MB  verify PASS
+  trial  3/3:    1007.27 MB/s         1.017 us/op  cpu  97.7%  peak      9.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=chacha_on cipher=chacha20-poly1305 size=16KB (16384 bytes) trials=3
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 28667 ops in 0.250 s -> 57334 iterations per trial
+  trial  1/3:    1895.01 MB/s         8.646 us/op  cpu  97.7%  peak      8.4 MB  verify PASS
+  trial  2/3:    1879.90 MB/s         8.715 us/op  cpu  96.9%  peak      9.4 MB  verify PASS
+  trial  3/3:    1879.17 MB/s         8.719 us/op  cpu  96.9%  peak      9.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=chacha_on cipher=chacha20-poly1305 size=256KB (262144 bytes) trials=3
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 1868 ops in 0.250 s -> 3735 iterations per trial
+  trial  1/3:    1991.36 MB/s       131.640 us/op  cpu  98.5%  peak      8.9 MB  verify PASS
+  trial  2/3:    1959.31 MB/s       133.794 us/op  cpu 100.1%  peak      9.9 MB  verify PASS
+  trial  3/3:    1973.65 MB/s       132.822 us/op  cpu 100.8%  peak      9.9 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=chacha_on cipher=chacha20-poly1305 size=1MB (1048576 bytes) trials=3
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 486 ops in 0.250 s -> 972 iterations per trial
+  trial  1/3:    1977.80 MB/s       530.174 us/op  cpu  97.0%  peak     10.4 MB  verify PASS
+  trial  2/3:    1988.71 MB/s       527.265 us/op  cpu  94.5%  peak     11.4 MB  verify PASS
+  trial  3/3:    2022.35 MB/s       518.494 us/op  cpu  99.2%  peak     11.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=chacha_on cipher=chacha20-poly1305 size=64MB (67108864 bytes) trials=3
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 8 ops in 0.266 s -> 16 iterations per trial
+  trial  1/3:    1972.16 MB/s     34028.175 us/op  cpu 100.4%  peak    136.4 MB  verify PASS
+  trial  2/3:    1975.09 MB/s     33977.650 us/op  cpu  94.8%  peak    137.4 MB  verify PASS
+  trial  3/3:    1940.83 MB/s     34577.487 us/op  cpu  98.8%  peak    137.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=chacha_on cipher=chacha20-poly1305 size=1GB (1073741824 bytes) trials=3
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 1 ops in 0.548 s -> 1 iterations per trial
+  trial  1/3:    1992.15 MB/s    538987.200 us/op  cpu  98.6%  peak   2056.4 MB  verify PASS
+  trial  2/3:    1992.09 MB/s    539002.800 us/op  cpu  98.6%  peak   2057.4 MB  verify PASS
+  trial  3/3:    1992.46 MB/s    538902.600 us/op  cpu  92.8%  peak   2057.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : ~0x200000200000000:~0x60000000000:~0x0  (OpenSSL told to ignore the masked CPU features)
+Config          : label=chacha_masked_control cipher=chacha20-poly1305 size=1KB (1024 bytes) trials=3
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 227932 ops in 0.250 s -> 455864 iterations per trial
+  trial  1/3:    1045.30 MB/s         0.980 us/op  cpu 101.5%  peak      8.4 MB  verify PASS
+  trial  2/3:     994.69 MB/s         1.029 us/op  cpu  93.2%  peak      9.4 MB  verify PASS
+  trial  3/3:    1018.33 MB/s         1.006 us/op  cpu  85.2%  peak      9.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : ~0x200000200000000:~0x60000000000:~0x0  (OpenSSL told to ignore the masked CPU features)
+Config          : label=chacha_masked_control cipher=chacha20-poly1305 size=16KB (16384 bytes) trials=3
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 28127 ops in 0.250 s -> 56253 iterations per trial
+  trial  1/3:    1904.32 MB/s         8.604 us/op  cpu  93.6%  peak      8.4 MB  verify PASS
+  trial  2/3:    1878.71 MB/s         8.721 us/op  cpu  95.6%  peak      9.4 MB  verify PASS
+  trial  3/3:    1881.93 MB/s         8.706 us/op  cpu  98.9%  peak      9.5 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : ~0x200000200000000:~0x60000000000:~0x0  (OpenSSL told to ignore the masked CPU features)
+Config          : label=chacha_masked_control cipher=chacha20-poly1305 size=256KB (262144 bytes) trials=3
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 1912 ops in 0.250 s -> 3823 iterations per trial
+  trial  1/3:    1976.43 MB/s       132.635 us/op  cpu 101.7%  peak      8.9 MB  verify PASS
+  trial  2/3:    1954.72 MB/s       134.108 us/op  cpu  88.4%  peak      9.9 MB  verify PASS
+  trial  3/3:    1937.85 MB/s       135.275 us/op  cpu  96.7%  peak      9.9 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : ~0x200000200000000:~0x60000000000:~0x0  (OpenSSL told to ignore the masked CPU features)
+Config          : label=chacha_masked_control cipher=chacha20-poly1305 size=1MB (1048576 bytes) trials=3
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 480 ops in 0.250 s -> 959 iterations per trial
+  trial  1/3:    2046.74 MB/s       512.316 us/op  cpu  98.6%  peak     10.4 MB  verify PASS
+  trial  2/3:    2026.78 MB/s       517.359 us/op  cpu 100.8%  peak     11.4 MB  verify PASS
+  trial  3/3:    2034.25 MB/s       515.462 us/op  cpu  94.8%  peak     11.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : ~0x200000200000000:~0x60000000000:~0x0  (OpenSSL told to ignore the masked CPU features)
+Config          : label=chacha_masked_control cipher=chacha20-poly1305 size=64MB (67108864 bytes) trials=3
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 8 ops in 0.268 s -> 15 iterations per trial
+  trial  1/3:    2020.10 MB/s     33220.540 us/op  cpu 100.3%  peak    136.4 MB  verify PASS
+  trial  2/3:    2016.80 MB/s     33274.927 us/op  cpu 100.2%  peak    137.4 MB  verify PASS
+  trial  3/3:    2006.52 MB/s     33445.473 us/op  cpu  96.6%  peak    137.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : ~0x200000200000000:~0x60000000000:~0x0  (OpenSSL told to ignore the masked CPU features)
+Config          : label=chacha_masked_control cipher=chacha20-poly1305 size=1GB (1073741824 bytes) trials=3
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 1 ops in 0.545 s -> 1 iterations per trial
+  trial  1/3:    2003.00 MB/s    536068.100 us/op  cpu  99.1%  peak   2056.4 MB  verify PASS
+  trial  2/3:    2018.51 MB/s    531948.500 us/op  cpu  94.0%  peak   2057.4 MB  verify PASS
+  trial  3/3:    1982.36 MB/s    541648.100 us/op  cpu  95.2%  peak   2057.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : ~0x200000200000000  (OpenSSL told to ignore the masked CPU features)
+Config          : label=aesni_off_fullmask cipher=aes-256-gcm size=1KB (1024 bytes) trials=3
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 37780 ops in 0.250 s -> 75559 iterations per trial
+  trial  1/3:     158.24 MB/s         6.471 us/op  cpu  99.1%  peak      8.4 MB  verify PASS
+  trial  2/3:     156.94 MB/s         6.525 us/op  cpu  91.9%  peak      9.4 MB  verify PASS
+  trial  3/3:     155.85 MB/s         6.570 us/op  cpu 100.7%  peak      9.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : ~0x200000200000000  (OpenSSL told to ignore the masked CPU features)
+Config          : label=aesni_off_fullmask cipher=aes-256-gcm size=16KB (16384 bytes) trials=3
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 2588 ops in 0.250 s -> 5175 iterations per trial
+  trial  1/3:     173.29 MB/s        94.548 us/op  cpu  99.0%  peak      8.4 MB  verify PASS
+  trial  2/3:     175.21 MB/s        93.512 us/op  cpu 100.1%  peak      9.4 MB  verify PASS
+  trial  3/3:     164.98 MB/s        99.309 us/op  cpu  94.3%  peak      9.5 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : ~0x200000200000000  (OpenSSL told to ignore the masked CPU features)
+Config          : label=aesni_off_fullmask cipher=aes-256-gcm size=256KB (262144 bytes) trials=3
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 167 ops in 0.250 s -> 334 iterations per trial
+  trial  1/3:     173.29 MB/s      1512.767 us/op  cpu  95.9%  peak      8.9 MB  verify PASS
+  trial  2/3:     174.91 MB/s      1498.731 us/op  cpu  99.9%  peak      9.9 MB  verify PASS
+  trial  3/3:     172.21 MB/s      1522.200 us/op  cpu  98.3%  peak      9.9 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : ~0x200000200000000  (OpenSSL told to ignore the masked CPU features)
+Config          : label=aesni_off_fullmask cipher=aes-256-gcm size=1MB (1048576 bytes) trials=3
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 41 ops in 0.250 s -> 82 iterations per trial
+  trial  1/3:     172.87 MB/s      6065.710 us/op  cpu  94.2%  peak     10.4 MB  verify PASS
+  trial  2/3:     175.55 MB/s      5973.140 us/op  cpu  98.9%  peak     11.4 MB  verify PASS
+  trial  3/3:     175.84 MB/s      5963.338 us/op  cpu  99.1%  peak     11.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : ~0x200000200000000  (OpenSSL told to ignore the masked CPU features)
+Config          : label=aesni_off_fullmask cipher=aes-256-gcm size=64MB (67108864 bytes) trials=3
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 1 ops in 0.378 s -> 2 iterations per trial
+  trial  1/3:     172.46 MB/s    389137.000 us/op  cpu 100.4%  peak    136.4 MB  verify PASS
+  trial  2/3:     174.42 MB/s    384758.150 us/op  cpu  93.4%  peak    137.4 MB  verify PASS
+  trial  3/3:     168.03 MB/s    399393.100 us/op  cpu  97.8%  peak    137.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : ~0x200000200000000  (OpenSSL told to ignore the masked CPU features)
+Config          : label=aesni_off_fullmask cipher=aes-256-gcm size=1GB (1073741824 bytes) trials=3
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 1 ops in 6.163 s -> 1 iterations per trial
+  trial  1/3:     174.11 MB/s   6167157.700 us/op  cpu  98.6%  peak   2056.4 MB  verify PASS
+  trial  2/3:     172.24 MB/s   6234009.800 us/op  cpu  98.5%  peak   2057.4 MB  verify PASS
+  trial  3/3:     167.83 MB/s   6397804.100 us/op  cpu  96.5%  peak   2057.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : ~0x200000200000000  (OpenSSL told to ignore the masked CPU features)
+Config          : label=chacha_fullmask cipher=chacha20-poly1305 size=1KB (1024 bytes) trials=3
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 144946 ops in 0.250 s -> 289892 iterations per trial
+  trial  1/3:     630.40 MB/s         1.624 us/op  cpu  89.6%  peak      8.4 MB  verify PASS
+  trial  2/3:     624.85 MB/s         1.639 us/op  cpu  98.7%  peak      9.4 MB  verify PASS
+  trial  3/3:     636.55 MB/s         1.609 us/op  cpu  90.5%  peak      9.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : ~0x200000200000000  (OpenSSL told to ignore the masked CPU features)
+Config          : label=chacha_fullmask cipher=chacha20-poly1305 size=16KB (16384 bytes) trials=3
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 12410 ops in 0.250 s -> 24819 iterations per trial
+  trial  1/3:     798.69 MB/s        20.514 us/op  cpu 101.3%  peak      8.4 MB  verify PASS
+  trial  2/3:     797.08 MB/s        20.555 us/op  cpu 101.1%  peak      9.4 MB  verify PASS
+  trial  3/3:     787.66 MB/s        20.801 us/op  cpu  93.8%  peak      9.5 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : ~0x200000200000000  (OpenSSL told to ignore the masked CPU features)
+Config          : label=chacha_fullmask cipher=chacha20-poly1305 size=256KB (262144 bytes) trials=3
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 752 ops in 0.250 s -> 1503 iterations per trial
+  trial  1/3:     820.48 MB/s       319.501 us/op  cpu 100.9%  peak      8.9 MB  verify PASS
+  trial  2/3:     811.85 MB/s       322.898 us/op  cpu  96.6%  peak      9.9 MB  verify PASS
+  trial  3/3:     821.15 MB/s       319.239 us/op  cpu  94.4%  peak      9.9 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : ~0x200000200000000  (OpenSSL told to ignore the masked CPU features)
+Config          : label=chacha_fullmask cipher=chacha20-poly1305 size=1MB (1048576 bytes) trials=3
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 195 ops in 0.250 s -> 390 iterations per trial
+  trial  1/3:     843.17 MB/s      1243.605 us/op  cpu  99.9%  peak     10.4 MB  verify PASS
+  trial  2/3:     820.83 MB/s      1277.453 us/op  cpu  97.2%  peak     11.4 MB  verify PASS
+  trial  3/3:     810.66 MB/s      1293.479 us/op  cpu  89.8%  peak     11.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : ~0x200000200000000  (OpenSSL told to ignore the masked CPU features)
+Config          : label=chacha_fullmask cipher=chacha20-poly1305 size=64MB (67108864 bytes) trials=3
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 4 ops in 0.329 s -> 7 iterations per trial
+  trial  1/3:     834.65 MB/s     80403.471 us/op  cpu  99.9%  peak    136.4 MB  verify PASS
+  trial  2/3:     816.53 MB/s     82187.529 us/op  cpu 100.5%  peak    137.4 MB  verify PASS
+  trial  3/3:     821.35 MB/s     81705.714 us/op  cpu  98.3%  peak    137.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : ~0x200000200000000  (OpenSSL told to ignore the masked CPU features)
+Config          : label=chacha_fullmask cipher=chacha20-poly1305 size=1GB (1073741824 bytes) trials=3
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 1 ops in 1.300 s -> 1 iterations per trial
+  trial  1/3:     823.06 MB/s   1304580.700 us/op  cpu  95.8%  peak   2056.4 MB  verify PASS
+  trial  2/3:     823.89 MB/s   1303265.800 us/op  cpu 100.7%  peak   2057.4 MB  verify PASS
+  trial  3/3:     824.03 MB/s   1303043.700 us/op  cpu  94.7%  peak   2057.4 MB  verify PASS

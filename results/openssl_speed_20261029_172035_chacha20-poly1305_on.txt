@@ -1,0 +1,18 @@
+﻿# command: openssl speed -seconds 3 -evp chacha20-poly1305
+# OPENSSL_ia32cap: unset
+# OpenSSL 3.6.5 29 Sep 2026 (Library: OpenSSL 3.6.5 29 Sep 2026)
+# CPUINFO: OPENSSL_ia32cap=0xfed8320b078bffff:0x00405fc6f1bf97a9:0x0000002000000010:0x0000000000000000:0x0000000000000000
+Doing ChaCha20-Poly1305 ops for 3s on 16 size blocks: 32947503 ChaCha20-Poly1305 ops in 2.80s
+Doing ChaCha20-Poly1305 ops for 3s on 64 size blocks: 13904656 ChaCha20-Poly1305 ops in 3.02s
+Doing ChaCha20-Poly1305 ops for 3s on 256 size blocks: 11577239 ChaCha20-Poly1305 ops in 2.94s
+Doing ChaCha20-Poly1305 ops for 3s on 1024 size blocks: 5128511 ChaCha20-Poly1305 ops in 2.95s
+Doing ChaCha20-Poly1305 ops for 3s on 8192 size blocks: 701981 ChaCha20-Poly1305 ops in 2.89s
+Doing ChaCha20-Poly1305 ops for 3s on 16384 size blocks: 355807 ChaCha20-Poly1305 ops in 2.88s
+version: 3.6.5
+built on: Fri Oct 30 00:08:11 2026 UTC
+options: bn(64,64)
+compiler: C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\Hostx64\\x64\\cl.exe /Zi /Fdossl_static.pdb /GF /Gy /MD -nologo -DWIN32 -D_WINDOWS -utf-8 -MP  -MD -O2 -Oi -Gy -DNDEBUG -Z7 -DL_ENDIAN -DOPENSSL_PIC -D"OPENSSL_BUILDING_OPENSSL" -D"OPENSSL_SYS_WIN32" -D"WIN32_LEAN_AND_MEAN" -D"UNICODE" -D"_UNICODE" -D"_CRT_SECURE_NO_DEPRECATE" -D"_WINSOCK_DEPRECATED_NO_WARNINGS" -D"NDEBUG"
+CPUINFO: OPENSSL_ia32cap=0xfed8320b078bffff:0x00405fc6f1bf97a9:0x0000002000000010:0x0000000000000000:0x0000000000000000
+The 'numbers' are in 1000s of bytes per second processed.
+type             16 bytes     64 bytes    256 bytes   1024 bytes   8192 bytes  16384 bytes
+ChaCha20-Poly1305   188481.80k   295095.70k  1008944.06k  1778317.97k  1989406.57k  2027666.74k

@@ -35,8 +35,19 @@ nothing else. The original mask is kept as the two `*_fullmask` diagnostic confi
 
 ## Requirements
 
-Visual Studio 2022 with "Desktop development with C++" (provides cl, CMake,
-Ninja and vcpkg), Git, and Python 3 with pandas + matplotlib (run with `py`).
+- Visual Studio 2022 with "Desktop development with C++" (provides cl, CMake, Ninja).
+- Git, and Python 3 with pandas + matplotlib (run with `py`).
+- **A standalone vcpkg.** The copy bundled with VS 2022 17.14 can no longer
+  build OpenSSL, because it downloads an MSYS2 package that has been removed. One-time setup:
+
+  ```powershell
+  git clone https://github.com/microsoft/vcpkg C:\vcpkg
+  C:\vcpkg\bootstrap-vcpkg.bat -disableMetrics
+  [Environment]::SetEnvironmentVariable('VCPKG_ROOT', 'C:\vcpkg', 'User')
+  ```
+
+  The scripts restore this `VCPKG_ROOT` after loading the VS developer shell,
+  which would otherwise replace it with the bundled copy.
 
 ## Build (Release x64)
 
@@ -54,7 +65,9 @@ of build files would slow everything down and can lock files mid-build.
 
 Visual Studio: *File > Open > Folder*, choose this folder, and pick the
 "x64 Release" preset in the toolbar. Never benchmark the Debug preset;
-`bench.exe` refuses to run if it was built as Debug.
+`bench.exe` refuses to run if it was built as Debug. (Not yet tested in the
+IDE. If CMake warns that it is using Visual Studio's bundled vcpkg, the IDE
+has overridden `VCPKG_ROOT`. Build with `scripts\build.ps1` instead.)
 
 ## Before every benchmark run
 
@@ -67,7 +80,8 @@ Visual Studio: *File > Open > Folder*, choose this folder, and pick the
 
 ```powershell
 .\scripts\openssl_speed.ps1                                 # cross-check with openssl speed
-.\scripts\run_all.ps1 -Trials 3 -ArmouryMode Performance    # preliminary
+.\scripts\run_all.ps1 -Trials 3 -ArmouryMode Performance    # preliminary (4 experiment configs)
+.\scripts\run_all.ps1 -Trials 3 -ArmouryMode Performance -Configs aesni_on,aesni_off,chacha_on,chacha_masked_control,aesni_off_fullmask,chacha_fullmask   # + diagnostics
 .\scripts\run_all.ps1 -Trials 10 -ArmouryMode Performance   # full
 py analysis\plot.py                                         # graphs + tables for newest run
 .\scripts\collect_env.ps1 -ArmouryMode Performance          # refresh docs/ENVIRONMENT.md
@@ -76,7 +90,7 @@ py analysis\plot.py                                         # graphs + tables fo
 One configuration by hand:
 
 ```powershell
-$env:OPENSSL_ia32cap = "~0x200000200000000"     # omit for AES-NI on
+$env:OPENSSL_ia32cap = "~0x200000200000000:~0x60000000000:~0x0"     # omit for AES-NI on
 & "$env:LOCALAPPDATA\aesni-bench\build\x64-release\bench.exe" --cipher aes-256-gcm --size 16KB --trials 3 --out results\manual.csv --label aesni_off
 Remove-Item Env:\OPENSSL_ia32cap
 ```
