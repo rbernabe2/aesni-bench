@@ -1,5 +1,15 @@
 cmake_minimum_required(VERSION 3.21)
 
+# The vcpkg bundled with Visual Studio 2022 17.14 can no longer build OpenSSL
+# (it downloads an MSYS2 package that has been removed). We use a standalone
+# vcpkg instead - see README "Requirements".
+if(CMAKE_TOOLCHAIN_FILE MATCHES "Microsoft Visual Studio")
+    message(WARNING
+        "Using Visual Studio's bundled vcpkg (${CMAKE_TOOLCHAIN_FILE}). "
+        "The OpenSSL build is known to fail with it. Set VCPKG_ROOT to the "
+        "standalone vcpkg (C:/vcpkg) - see README.")
+endif()
+
 # vcpkg (manifest mode) is hooked in through CMAKE_TOOLCHAIN_FILE in
 # CMakePresets.json. It reads vcpkg.json and builds OpenSSL for us.
 project(aesni_bench LANGUAGES CXX)
@@ -14,7 +24,9 @@ if(MSVC)
     # /W4 = lots of warnings, /permissive- = strict standard C++.
     # Release builds already get /O2 (optimize for speed) from CMake.
     add_compile_options(/W4 /permissive- /utf-8)
-    add_compile_definitions(WIN32_LEAN_AND_MEAN NOMINMAX)
+    # _CRT_SECURE_NO_WARNINGS: MSVC flags std::getenv as "unsafe"; it is
+    # standard C++ and fine for reading OPENSSL_ia32cap.
+    add_compile_definitions(WIN32_LEAN_AND_MEAN NOMINMAX _CRT_SECURE_NO_WARNINGS)
 endif()
 
 # ---- Benchmark harness -------------------------------------------------------
