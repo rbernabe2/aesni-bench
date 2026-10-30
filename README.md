@@ -7,13 +7,31 @@ for software?
 | Config label | Cipher | `OPENSSL_ia32cap` | Role |
 |---|---|---|---|
 | `aesni_on` | AES-256-GCM | unset | Baseline (hardware AES allowed) |
-| `aesni_off` | AES-256-GCM | `~0x200000200000000` | Comparison 1: AES-NI + PCLMULQDQ hidden, so OpenSSL uses software AES and software GHASH |
+| `aesni_off` | AES-256-GCM | `~0x200000200000000:~0x60000000000:~0x0` | Comparison 1: all hardware AES hidden, so OpenSSL uses software AES and software GHASH |
 | `chacha_on` | ChaCha20-Poly1305 | unset | Comparison 2: software-oriented cipher |
-| `chacha_masked_control` | ChaCha20-Poly1305 | `~0x200000200000000` | Control: should match `chacha_on`, since ChaCha20 doesn't use AES-NI |
+| `chacha_masked_control` | ChaCha20-Poly1305 | `~0x200000200000000:~0x60000000000:~0x0` | Control: should match `chacha_on`, since ChaCha20 doesn't use AES instructions |
+| `aesni_off_fullmask` | AES-256-GCM | `~0x200000200000000` | Diagnostic: the proposal's original mask |
+| `chacha_fullmask` | ChaCha20-Poly1305 | `~0x200000200000000` | Diagnostic: the proposal's original mask |
 
-`OPENSSL_ia32cap` is read by OpenSSL when a program starts. The `~` means
-"clear these bits" from what the CPU reports. Bit 57 = AES-NI, bit 33 =
-PCLMULQDQ (the carry-less multiply GCM uses for its authentication tag).
+`OPENSSL_ia32cap` is read by OpenSSL when a program starts. It holds several
+64-bit "capability words" separated by `:`, and `~X` means "clear the bits in X".
+
+- Word 1: bit 57 = AES-NI, bit 33 = PCLMULQDQ (the carry-less multiply GCM uses for its tag).
+- Word 2: bit 41 = VAES, bit 42 = VPCLMULQDQ (the wide AVX-512 versions of those two).
+  This word also holds AVX2, AVX-512, SHA and more.
+
+**Why not the proposal's `~0x200000200000000`?** We checked with `openssl version -a`
+(its CPUINFO line shows the bits OpenSSL really uses) and `openssl speed`:
+
+1. If a word is left out of the variable, OpenSSL 3.6.5 sets it to **zero**. The
+   original mask therefore also disabled AVX2/AVX-512, which made ChaCha20 (the
+   control) about 2.3× slower.
+2. On this Zen 4 CPU, OpenSSL's fastest AES-GCM code uses VAES/VPCLMULQDQ and
+   checks only word 2. Hiding just AES-NI + PCLMULQDQ (`~0x200000200000000:~0x0:~0x0`)
+   left AES-GCM exactly as fast.
+
+`~0x200000200000000:~0x60000000000:~0x0` clears exactly those four bits and
+nothing else. The original mask is kept as the two `*_fullmask` diagnostic configs.
 
 ## Requirements
 

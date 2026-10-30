@@ -29,12 +29,17 @@ $ResultsDir = Join-Path $RepoRoot 'results'
 # Masks for OpenSSL's CPU-feature detection. "~X" means "clear the bits in X".
 # OpenSSL keeps several 64-bit capability words, written separated by ':'.
 #
-# $AesNiMask hides ONLY AES-NI (bit 57) and PCLMULQDQ (bit 33) of word 1.
-# The ":~0x0:~0x0" parts mean "leave words 2 and 3 unchanged". They are
-# required: we found (with `openssl version -a`, CPUINFO line) that OpenSSL
-# 3.6.5 sets any word NOT given in the variable to ZERO. Word 2 holds AVX2,
-# AVX-512, VAES, SHA, BMI etc., so leaving it out would also switch those off.
-$AesNiMask = '~0x200000200000000:~0x0:~0x0'
+# $AesNiMask hides ALL hardware AES help and nothing else:
+#   word 1: AES-NI (bit 57) + PCLMULQDQ (bit 33)        -> ~0x200000200000000
+#   word 2: VAES (bit 41) + VPCLMULQDQ (bit 42)          -> ~0x60000000000
+#   word 3: unchanged                                    -> ~0x0
+# Two things we found with `openssl version -a` (CPUINFO line) + openssl speed:
+#  * OpenSSL 3.6.5 sets any word NOT given in the variable to ZERO. Word 2 also
+#    holds AVX2, AVX-512, SHA, BMI etc., so it must be listed explicitly.
+#  * On Zen 4, OpenSSL's fastest AES-GCM code uses VAES/VPCLMULQDQ (AVX-512)
+#    and checks only the word-2 bits. Hiding just AES-NI + PCLMULQDQ left
+#    AES-GCM exactly as fast, so VAES + VPCLMULQDQ must be hidden too.
+$AesNiMask = '~0x200000200000000:~0x60000000000:~0x0'
 # The original mask from our proposal. Because words 2-3 are omitted it ALSO
 # disables AVX2/AVX-512/VAES etc. Kept only for the *_fullmask diagnostic configs.
 $FullMask = '~0x200000200000000'

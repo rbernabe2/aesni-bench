@@ -45,14 +45,15 @@ target_compile_definitions(kat PRIVATE
 # `ctest` runs the known-answer tests three times, once per code path OpenSSL
 # can pick, so every path we benchmark is proven correct:
 #   kat_default        - nothing masked (hardware AES allowed)
-#   kat_aesni_masked   - only AES-NI + PCLMULQDQ hidden (our aesni_off config)
+#   kat_aesni_masked   - all hardware AES hidden (AES-NI, PCLMULQDQ, VAES,
+#                        VPCLMULQDQ) but AVX2/AVX-512 kept: our aesni_off config
 #   kat_fullmask       - the proposal's original mask, which also hides
-#                        AVX2/AVX-512/VAES etc. (see scripts/common.ps1)
+#                        AVX2/AVX-512 etc. (see scripts/common.ps1)
 enable_testing()
 add_test(NAME kat_default COMMAND kat)
 add_test(NAME kat_aesni_masked COMMAND kat)
 set_tests_properties(kat_aesni_masked PROPERTIES
-    ENVIRONMENT "OPENSSL_ia32cap=~0x200000200000000:~0x0:~0x0")
+    ENVIRONMENT "OPENSSL_ia32cap=~0x200000200000000:~0x60000000000:~0x0")
 add_test(NAME kat_fullmask COMMAND kat)
 set_tests_properties(kat_fullmask PROPERTIES
     ENVIRONMENT "OPENSSL_ia32cap=~0x200000200000000")
