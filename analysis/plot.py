@@ -29,12 +29,16 @@ RESULTS = os.path.join(REPO, "results")
 # Fixed config order and style. Color follows the configuration (never its
 # rank). Marker + line style give a second cue so the lines can be told apart
 # without color (colorblind readers, grayscale printing).
-CONFIGS = ["aesni_on", "aesni_off", "chacha_on", "chacha_masked_control"]
+CONFIGS = ["aesni_on", "aesni_off", "chacha_on", "chacha_masked_control",
+           "aesni_off_fullmask", "chacha_fullmask"]
 STYLE = {
     "aesni_on":              dict(color="#2a78d6", marker="o", linestyle="-",  label="AES-256-GCM, AES-NI on (baseline)"),
     "aesni_off":             dict(color="#eb6834", marker="s", linestyle="-",  label="AES-256-GCM, AES-NI off"),
     "chacha_on":             dict(color="#1baf7a", marker="^", linestyle="-",  label="ChaCha20-Poly1305"),
-    "chacha_masked_control": dict(color="#eda100", marker="v", linestyle="--", label="ChaCha20-Poly1305, mask set (control)"),
+    "chacha_masked_control": dict(color="#eda100", marker="v", linestyle="--", label="ChaCha20-Poly1305, AES-NI mask (control)"),
+    # diagnostics: the proposal's original mask, which also disables AVX2/AVX-512/VAES
+    "aesni_off_fullmask":    dict(color="#e87ba4", marker="D", linestyle=":",  label="AES-256-GCM, original full mask (diagnostic)"),
+    "chacha_fullmask":       dict(color="#008300", marker="P", linestyle=":",  label="ChaCha20-Poly1305, original full mask (diagnostic)"),
 }
 INK, MUTED, GRID = "#0b0b0b", "#52514e", "#e1e0d9"
 
@@ -150,7 +154,8 @@ def openssl_comparison(s):
         return "No openssl_speed_*.csv found - run scripts/openssl_speed.ps1.\n"
     o = pd.read_csv(files[-1])
     pairs = [("aesni_on", "aes-256-gcm_on"), ("aesni_off", "aes-256-gcm_masked"),
-             ("chacha_on", "chacha20-poly1305_on"), ("chacha_masked_control", "chacha20-poly1305_masked")]
+             ("chacha_on", "chacha20-poly1305_on"), ("chacha_masked_control", "chacha20-poly1305_masked"),
+             ("aesni_off_fullmask", "aes-256-gcm_fullmask"), ("chacha_fullmask", "chacha20-poly1305_fullmask")]
     lines = [f"Reference file: `{os.path.basename(files[-1])}`",
              "",
              "| Config | Size | Our harness MB/s | openssl speed -evp MB/s | ours / evp | openssl speed -aead MB/s | ours / aead |",

@@ -26,9 +26,18 @@ $VcpkgInstalled = Join-Path $BuildDir 'vcpkg_installed\x64-windows'
 $OpenSslExe = Join-Path $VcpkgInstalled 'tools\openssl\openssl.exe'
 $ResultsDir = Join-Path $RepoRoot 'results'
 
-# The mask that hides AES-NI (bit 57) and PCLMULQDQ (bit 33) from OpenSSL's
-# CPU-feature detection. "~" means "clear these bits" from what CPUID reports.
-$AesNiMask = '~0x200000200000000'
+# Masks for OpenSSL's CPU-feature detection. "~X" means "clear the bits in X".
+# OpenSSL keeps several 64-bit capability words, written separated by ':'.
+#
+# $AesNiMask hides ONLY AES-NI (bit 57) and PCLMULQDQ (bit 33) of word 1.
+# The ":~0x0:~0x0" parts mean "leave words 2 and 3 unchanged". They are
+# required: we found (with `openssl version -a`, CPUINFO line) that OpenSSL
+# 3.6.5 sets any word NOT given in the variable to ZERO. Word 2 holds AVX2,
+# AVX-512, VAES, SHA, BMI etc., so leaving it out would also switch those off.
+$AesNiMask = '~0x200000200000000:~0x0:~0x0'
+# The original mask from our proposal. Because words 2-3 are omitted it ALSO
+# disables AVX2/AVX-512/VAES etc. Kept only for the *_fullmask diagnostic configs.
+$FullMask = '~0x200000200000000'
 
 function Enter-DevShell {
     # We use a standalone vcpkg (VCPKG_ROOT=C:\vcpkg, set for the Windows user),

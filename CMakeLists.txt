@@ -42,11 +42,17 @@ target_link_libraries(kat PRIVATE OpenSSL::Crypto)
 target_compile_definitions(kat PRIVATE
     KAT_VECTOR_DIR="${CMAKE_SOURCE_DIR}/testvectors")
 
-# `ctest` runs the known-answer tests twice: once normally (hardware AES-NI
-# allowed) and once with AES-NI + PCLMULQDQ masked off, so both the hardware
-# and the pure-software code paths inside OpenSSL are proven correct.
+# `ctest` runs the known-answer tests three times, once per code path OpenSSL
+# can pick, so every path we benchmark is proven correct:
+#   kat_default        - nothing masked (hardware AES allowed)
+#   kat_aesni_masked   - only AES-NI + PCLMULQDQ hidden (our aesni_off config)
+#   kat_fullmask       - the proposal's original mask, which also hides
+#                        AVX2/AVX-512/VAES etc. (see scripts/common.ps1)
 enable_testing()
 add_test(NAME kat_default COMMAND kat)
 add_test(NAME kat_aesni_masked COMMAND kat)
 set_tests_properties(kat_aesni_masked PROPERTIES
+    ENVIRONMENT "OPENSSL_ia32cap=~0x200000200000000:~0x0:~0x0")
+add_test(NAME kat_fullmask COMMAND kat)
+set_tests_properties(kat_fullmask PROPERTIES
     ENVIRONMENT "OPENSSL_ia32cap=~0x200000200000000")

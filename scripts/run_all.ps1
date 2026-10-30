@@ -24,12 +24,17 @@ param(
 
 . "$PSScriptRoot\common.ps1"
 
-# The four configurations: which cipher, and whether AES-NI is masked.
+# The configurations: which cipher, and which OPENSSL_ia32cap mask ('' = unset).
+# The first four are the experiment; the *_fullmask ones are diagnostics that
+# use the proposal's original mask string, which also disables AVX2/AVX-512/
+# VAES (see common.ps1). Run them with -Configs if wanted.
 $ConfigTable = @{
     aesni_on              = @{ Cipher = 'aes-256-gcm';       Mask = '' }          # BASELINE
     aesni_off             = @{ Cipher = 'aes-256-gcm';       Mask = $AesNiMask }  # COMPARISON 1
     chacha_on             = @{ Cipher = 'chacha20-poly1305'; Mask = '' }          # COMPARISON 2
     chacha_masked_control = @{ Cipher = 'chacha20-poly1305'; Mask = $AesNiMask }  # control: expect no change
+    aesni_off_fullmask    = @{ Cipher = 'aes-256-gcm';       Mask = $FullMask }   # diagnostic
+    chacha_fullmask       = @{ Cipher = 'chacha20-poly1305'; Mask = $FullMask }   # diagnostic
 }
 
 # ---- Safety checks -------------------------------------------------------------

@@ -45,14 +45,18 @@ Write-Host "-aead mode supported: $supportsAead"
 # Each run: a name, the cipher, the OPENSSL_ia32cap value ('' = unset), extra args.
 # "vaes_masked" is a diagnostic: it hides only VAES + VPCLMULQDQ (the newer
 # wide vector AES instructions, stored in OpenSSL's second capability word)
-# while leaving classic AES-NI visible. "~0x0" for the first word = no change.
-$VaesMask = '~0x0:~0x60000000000'
+# while leaving classic AES-NI visible. "~0x0" = leave that word unchanged.
+# "fullmask" runs use the proposal's original mask, which also zeroes words 2-3
+# (AVX2, AVX-512, VAES, ...) - see common.ps1.
+$VaesMask = '~0x0:~0x60000000000:~0x0'
 $runs = @(
-    @{ Name = 'aes-256-gcm_on';           Cipher = 'aes-256-gcm';       Mask = '';         Mode = 'evp' }
-    @{ Name = 'aes-256-gcm_masked';       Cipher = 'aes-256-gcm';       Mask = $AesNiMask; Mode = 'evp' }
-    @{ Name = 'chacha20-poly1305_on';     Cipher = 'chacha20-poly1305'; Mask = '';         Mode = 'evp' }
-    @{ Name = 'chacha20-poly1305_masked'; Cipher = 'chacha20-poly1305'; Mask = $AesNiMask; Mode = 'evp' }
-    @{ Name = 'aes-256-gcm_vaes_masked';  Cipher = 'aes-256-gcm';       Mask = $VaesMask;  Mode = 'evp' }
+    @{ Name = 'aes-256-gcm_on';             Cipher = 'aes-256-gcm';       Mask = '';         Mode = 'evp' }
+    @{ Name = 'aes-256-gcm_masked';         Cipher = 'aes-256-gcm';       Mask = $AesNiMask; Mode = 'evp' }
+    @{ Name = 'chacha20-poly1305_on';       Cipher = 'chacha20-poly1305'; Mask = '';         Mode = 'evp' }
+    @{ Name = 'chacha20-poly1305_masked';   Cipher = 'chacha20-poly1305'; Mask = $AesNiMask; Mode = 'evp' }
+    @{ Name = 'aes-256-gcm_vaes_masked';    Cipher = 'aes-256-gcm';       Mask = $VaesMask;  Mode = 'evp' }
+    @{ Name = 'aes-256-gcm_fullmask';       Cipher = 'aes-256-gcm';       Mask = $FullMask;  Mode = 'evp' }
+    @{ Name = 'chacha20-poly1305_fullmask'; Cipher = 'chacha20-poly1305'; Mask = $FullMask;  Mode = 'evp' }
 )
 if ($supportsAead) {
     $runs += @(
