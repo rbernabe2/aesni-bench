@@ -171,6 +171,11 @@ def openssl_comparison(s):
              ("aesni_off_fullmask", "aes-256-gcm_fullmask"), ("chacha_fullmask", "chacha20-poly1305_fullmask")]
     lines = [f"Reference file: `{os.path.basename(files[-1])}`",
              "",
+             "Compare at **16 KB**. At small sizes the tools time different work per message: "
+             "`openssl speed` streams ChaCha20-Poly1305 (no nonce/Final/tag per message) and "
+             "re-loads the AES-GCM key every message, while bench.exe times complete messages "
+             "with the key reused. See `docs/SPEED_COMPARISON.md`.",
+             "",
              "| Config | Size | Our harness MB/s | openssl speed -evp MB/s | ours / evp | openssl speed -aead MB/s | ours / aead |",
              "|---|---|---|---|---|---|---|"]
     for cfg, run in pairs:

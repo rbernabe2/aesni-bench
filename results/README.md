@@ -21,6 +21,12 @@ Run `20261029_172506` also includes `_fullmask` (the original string) and
 `_vaes_masked` (only VAES + VPCLMULQDQ hidden, classic AES-NI still on)
 diagnostics.
 
+## Method probe (diagnostic)
+
+| File | What it is |
+|---|---|
+| `method_probe_20261029_181211.csv` | `src/method_probe.cpp`: times our per-message method against `openssl speed`'s, side by side. Rows: 1 KB (no mask, all-hardware-AES mask) and 16 KB, 5 reps × 1 s each; then 256 B / 2 KB / 4 KB / 8 KB, no mask, 3 reps × 0.5 s each. Explains the 1 KB gap; see `docs/SPEED_COMPARISON.md`. |
+
 ## Harness runs
 
 | Run | Trials | Configs | Notes |

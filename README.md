@@ -108,6 +108,7 @@ Remove-Item Env:\OPENSSL_ia32cap
 |---|---|
 | `src/bench.cpp` | Benchmark harness (one cipher, one size, N trials, CSV rows) |
 | `src/kat.cpp` | Correctness tests: all NIST GCM-256 vectors, RFC 8439 vector, tamper tests |
+| `src/method_probe.cpp` | Diagnostic: our per-message method vs `openssl speed`'s, side by side (see `docs/SPEED_COMPARISON.md`) |
 | `testvectors/` | Official test vector files plus where they came from |
 | `scripts/build.ps1` | Configure + build + test |
 | `scripts/run_all.ps1` | All configs × sizes × trials into a timestamped CSV |
@@ -119,3 +120,4 @@ Remove-Item Env:\OPENSSL_ia32cap
 | `results/` | Raw CSVs, logs and per-run environment snapshots (never overwritten) |
 | `docs/ENVIRONMENT.md` | Test environment |
 | `docs/PROGRESS.md` | Weekly progress log |
+| `docs/SPEED_COMPARISON.md` | Why small-size results differ from `openssl speed` |

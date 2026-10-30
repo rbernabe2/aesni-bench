@@ -46,7 +46,8 @@ hardware AES hidden 175 MB/s.
 | 2026-10-29 | CPU + memory in every CSV row | Van | Done | CPU time = GetProcessTimes (user + kernel) over the timed loop, reported as % of one core; peak working set via GetProcessMemoryInfo. |
 | 2026-10-29 | Preliminary run, 3 trials, all configs | Both | Done | `run_20261029_172841_t3`: 6 configs × 6 sizes × 3 trials = 108 rows, **108/108 verified PASS**, 2.9 min. |
 | 2026-10-29 | Preliminary graph + summary table | Van | Done | `run_20261029_172841_t3_throughput.png`, `_throughput_logy.png`, `_table.png`, `_summary.md`. |
-| 2026-10-29 | Compare harness with `openssl speed` | Van / Ryan | Done, **open question at 1 KB** | At 16 KB every config agrees within 8% (ours / openssl ‑evp = 0.92-1.00). At 1 KB, AES-GCM-on is *faster* in our harness (2,686 vs 2,090 MB/s, ×1.29) and ChaCha20 is *slower* (1,026 vs 1,866 MB/s, ×0.55). Cause not yet known; see Week 3. |
+| 2026-10-29 | Compare harness with `openssl speed` | Van / Ryan | Done | At 16 KB every config agrees within 8% (ours / openssl ‑evp = 0.92-1.00). At 1 KB, AES-GCM-on is *faster* in our harness (2,686 vs 2,090 MB/s, ×1.29) and ChaCha20 is *slower* (1,026 vs 1,866 MB/s, ×0.55). |
+| 2026-10-29 | Explain the 1 KB gap with `openssl speed` | Van / Ryan | Done, **no harness change needed** | The tools time different work. `openssl speed` streams ChaCha20-Poly1305 (no per-message nonce/Final/tag, even with `-aead`) and re-loads the AES-GCM key every message. `src/method_probe.cpp` reproduces both tools within ~6%. Re-keying AES-GCM costs ~120 ns per message; a complete ChaCha20 message costs ~0.39–0.44 µs more than streaming (256 B–8 KB). Full write-up: `docs/SPEED_COMPARISON.md`; data: `results/method_probe_20261029_181211.csv`. |
 
 ### Preliminary results (3 trials, mean MB/s)
 
@@ -63,7 +64,7 @@ Source: `results/run_20261029_172841_t3_summary.md` (includes ± sd, latency, CP
 
 ## Week 3: open items to decide or fix
 
-1. **Explain the 1 KB gap with `openssl speed`** (ChaCha20 ×0.55, AES-GCM ×1.29). Compare our per-message steps with what `openssl speed -aead` does per block.
+1. ~~Explain the 1 KB gap with `openssl speed`~~: resolved (see above and `docs/SPEED_COMPARISON.md`). Still open but optional: what exactly costs ~0.4 µs per ChaCha20-Poly1305 message, and why streaming slows down at 16 KB.
 2. **Confirm the mask change** with the instructor and update the proposal wording.
 3. **Decide whether to add a "classic AES-NI only" config** (`~0x0:~0x60000000000:~0x0`). This would separate the AVX-512 VAES speed-up from the classic AES-NI speed-up.
 4. **Keep or drop the `*_fullmask` diagnostics** for the 10-trial run.
