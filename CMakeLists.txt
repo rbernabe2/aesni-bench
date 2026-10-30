@@ -36,6 +36,11 @@ target_link_libraries(bench PRIVATE OpenSSL::Crypto psapi)
 # build by accident. With the Ninja generator $<CONFIG> == CMAKE_BUILD_TYPE.
 target_compile_definitions(bench PRIVATE BENCH_BUILD_TYPE="$<CONFIG>")
 
+# ---- Diagnostic: compare per-message methods with `openssl speed` -------------
+# Not part of the experiment; see the comment at the top of the file.
+add_executable(method_probe src/method_probe.cpp)
+target_link_libraries(method_probe PRIVATE OpenSSL::Crypto)
+
 # ---- Known-answer tests ------------------------------------------------------
 add_executable(kat src/kat.cpp)
 target_link_libraries(kat PRIVATE OpenSSL::Crypto)
