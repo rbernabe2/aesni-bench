@@ -7,6 +7,7 @@ Usage (from the repo root):
 Writes next to the (first) input CSV, named after it:
     <run>_throughput.png   throughput vs data size, one line per config,
                            error bars = sample standard deviation over trials
+    <run>_throughput_logy.png  same, with a log throughput axis
     <run>_table.png        the mean +- std dev table as an image (for slides)
     <run>_summary.csv      the same table as data
     <run>_summary.md       Markdown table + speedups + openssl speed comparison
@@ -21,6 +22,7 @@ import sys
 import matplotlib
 matplotlib.use("Agg")                 # draw to files, no window needed
 import matplotlib.pyplot as plt
+import matplotlib.ticker
 import pandas as pd
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -76,8 +78,10 @@ def summarize(df):
     return s.sort_values(["config_label", "size_bytes"]).reset_index(drop=True)
 
 
-def plot_throughput(s, out_png, title_note):
-    fig, ax = plt.subplots(figsize=(9, 5.5), dpi=150)
+def plot_throughput(s, out_png, title_note, log_y=False):
+    """log_y=True draws a second version with a log throughput axis, so the
+    slow configs (~170 MB/s) are readable next to the fast ones (~6,500 MB/s)."""
+    fig, ax = plt.subplots(figsize=(9, 6.5), dpi=150)
     for cfg in CONFIGS:
         d = s[s["config_label"] == cfg]
         if d.empty:
@@ -92,17 +96,24 @@ def plot_throughput(s, out_png, title_note):
     ax.set_xticks(sizes)
     ax.set_xticklabels([size_label(int(n)) for n in sizes])
     ax.minorticks_off()
-    ax.set_ylim(bottom=0)
+    if log_y:
+        ax.set_yscale("log")
+        plain = matplotlib.ticker.FuncFormatter(lambda v, _: f"{v:,.0f}")
+        ax.yaxis.set_major_formatter(plain)
+        ax.yaxis.set_minor_formatter(plain)
+    else:
+        ax.set_ylim(bottom=0)
     ax.set_xlabel("Data size per encryption (log scale)", color=INK)
-    ax.set_ylabel("Throughput (MB/s, 1 MB = 10^6 bytes)", color=INK)
+    ax.set_ylabel("Throughput (MB/s, 1 MB = 10^6 bytes)" + (", log scale" if log_y else ""), color=INK)
     ax.set_title("Encryption throughput vs. data size\n" + title_note, color=INK, fontsize=11)
-    ax.grid(True, axis="y", color=GRID, linewidth=0.8)
+    ax.grid(True, axis="y", which="both" if log_y else "major", color=GRID, linewidth=0.8)
     for side in ("top", "right"):
         ax.spines[side].set_visible(False)
     for side in ("left", "bottom"):
         ax.spines[side].set_color("#c3c2b7")
     ax.tick_params(colors=MUTED)
-    ax.legend(frameon=False, loc="best", fontsize=9)
+    # Legend below the plot so it never covers a line.
+    ax.legend(frameon=False, fontsize=9, ncol=2, loc="upper center", bbox_to_anchor=(0.5, -0.13))
     fig.text(0.01, 0.01, "Points = mean over trials; error bars = ±1 sample standard deviation.",
              fontsize=8, color=MUTED)
     fig.tight_layout(rect=(0, 0.03, 1, 1))
@@ -132,18 +143,20 @@ HEADERS = ["Config", "Size", "Trials", "Throughput MB/s (mean ± sd)", "Latency 
 
 def plot_table(s, out_png):
     rows = table_rows(s)
-    fig, ax = plt.subplots(figsize=(13, 0.32 * len(rows) + 0.9), dpi=150)
+    headers = [h.replace(" (", "\n(").replace("Baseline is", "Baseline is\n") for h in HEADERS]
+    fig, ax = plt.subplots(figsize=(13, 0.3 * len(rows) + 1.2), dpi=150)
     ax.axis("off")
-    t = ax.table(cellText=rows, colLabels=HEADERS, loc="center", cellLoc="right", colLoc="center")
+    t = ax.table(cellText=rows, colLabels=headers, loc="center", cellLoc="right", colLoc="center")
     t.auto_set_font_size(False)
     t.set_fontsize(8)
-    t.scale(1, 1.25)
+    t.auto_set_column_width(list(range(len(headers))))   # widen columns to fit their text
+    t.scale(1, 1.3)
     for (r, _), cell in t.get_celld().items():
         cell.set_edgecolor(GRID)
         if r == 0:
             cell.set_text_props(weight="bold", color=INK)
-    fig.tight_layout()
-    fig.savefig(out_png)
+            cell.set_height(cell.get_height() * 2)       # room for two-line headers
+    fig.savefig(out_png, bbox_inches="tight", pad_inches=0.1)
     plt.close(fig)
 
 
@@ -185,6 +198,7 @@ def main():
     note = f"{os.path.basename(stem)} · up to {trials} trials per point · OpenSSL EVP, single thread"
 
     plot_throughput(s, stem + "_throughput.png", note)
+    plot_throughput(s, stem + "_throughput_logy.png", note, log_y=True)
     plot_table(s, stem + "_table.png")
     s.to_csv(stem + "_summary.csv", index=False, float_format="%.3f")
 
