@@ -51,7 +51,15 @@ $benchInfo  = if (Test-Path $BenchExe)   { Invoke-Text "`"$BenchExe`" --info" } 
 $opensslVer = if (Test-Path $OpenSslExe) { $env:Path = (Join-Path $VcpkgInstalled 'bin') + ';' + $env:Path; Invoke-Text "`"$OpenSslExe`" version -a" } else { '(openssl.exe not found)' }
 $baseline = (Get-Content (Join-Path $RepoRoot 'vcpkg-configuration.json') -Raw | ConvertFrom-Json).'default-registry'.baseline
 Push-Location $RepoRoot
-$commit = (git rev-parse --short HEAD) + $(if (git status --porcelain) { ' (+ uncommitted changes)' } else { '' })
+# "Uncommitted changes" ignores the file this script is about to write.
+$outFull = [IO.Path]::GetFullPath($OutFile)
+if ($outFull.StartsWith($RepoRoot, [StringComparison]::OrdinalIgnoreCase)) {
+    $outRel = $outFull.Substring($RepoRoot.Length).TrimStart('\') -replace '\\', '/'
+    $dirty = git status --porcelain -- . ":(exclude)$outRel"
+} else {
+    $dirty = git status --porcelain
+}
+$commit = (git rev-parse --short HEAD) + $(if ($dirty) { ' (+ uncommitted changes)' } else { '' })
 Pop-Location
 
 $md = @"
