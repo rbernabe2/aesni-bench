@@ -15,6 +15,9 @@
 //   --label   name of the configuration, e.g. aesni_on, aesni_off
 //   --min-seconds  target length of one trial (default 0.5)
 //   --pin N   pin this program to logical processor N and raise its priority
+//   --first-trial N  number the trials N, N+1, ... in the CSV (default 1).
+//            run_all.ps1 runs ONE trial per program run so it can interleave
+//            the configurations, and uses this to label trial = round number.
 //   --info    print OpenSSL / CPU information and exit
 //   --allow-debug  allow running a Debug build (results would be meaningless)
 //
@@ -76,6 +79,7 @@ struct Options {
     double min_seconds = 0.5;
     double warmup_seconds = 0.25;
     int pin = -1;            // -1 = don't pin
+    int first_trial = 1;     // trial number written for the first trial
     bool info_only = false;
     bool allow_debug = false;
 };
@@ -117,6 +121,7 @@ static Options parse_args(int argc, char** argv) {
         else if (a == "--label")        o.label = next();
         else if (a == "--min-seconds")  o.min_seconds = std::stod(next());
         else if (a == "--pin")          o.pin = std::stoi(next());
+        else if (a == "--first-trial")  o.first_trial = std::stoi(next());
         else if (a == "--info")         o.info_only = true;
         else if (a == "--allow-debug")  o.allow_debug = true;
         else die("unknown option " + a);
@@ -273,7 +278,10 @@ static bool verify(EVP_CIPHER_CTX* dctx, const EVP_CIPHER* cipher, const unsigne
 static const char* kCsvHeader =
     "timestamp,config_label,cipher,openssl_ia32cap,size_bytes,iterations,trial,"
     "wall_seconds,cpu_seconds,throughput_MBps,latency_us_per_op,"
-    "cpu_util_pct_one_core,peak_mem_MB,verified";
+    "cpu_util_pct_one_core,peak_mem_MB,verified,start_utc,end_utc";
+// start_utc / end_utc = wall-clock time (UTC, milliseconds) when this trial's
+// timed region began and ended, so the order and spacing of trials can be
+// checked afterwards (e.g. that configurations really were interleaved).
 
 static std::string utc_timestamp() {
     std::time_t t = std::time(nullptr);
@@ -284,6 +292,20 @@ static std::string utc_timestamp() {
     return buf;
 }
 
+// Same, for a given moment, with milliseconds: 2026-11-12T19:05:31.123Z
+static std::string utc_timestamp_ms(std::chrono::system_clock::time_point tp) {
+    using namespace std::chrono;
+    std::time_t t = system_clock::to_time_t(tp);
+    long long ms = duration_cast<milliseconds>(tp.time_since_epoch()).count() % 1000;
+    std::tm tm{};
+    gmtime_s(&tm, &t);
+    char buf[40];
+    std::strftime(buf, sizeof(buf), "%Y-%m-%dT%H:%M:%S", &tm);
+    char out[48];
+    std::snprintf(out, sizeof(out), "%s.%03lldZ", buf, ms);
+    return out;
+}
+
 // Append one row. The file is opened and closed per row, AFTER timing, so
 // file I/O never happens inside the measured region.
 static void append_csv(const std::string& path, const std::string& row) {
@@ -291,6 +313,15 @@ static void append_csv(const std::string& path, const std::string& row) {
     fs::path p(path);
     if (p.has_parent_path()) fs::create_directories(p.parent_path());
     bool needs_header = !fs::exists(p) || fs::file_size(p) == 0;
+    if (!needs_header) {
+        // Refuse to mix column layouts in one file (older CSVs have fewer columns).
+        std::ifstream in(p);
+        std::string first;
+        std::getline(in, first);
+        if (!first.empty() && first.back() == '\r') first.pop_back();
+        if (first != kCsvHeader)
+            die("CSV file " + path + " has a different column layout - write to a new file");
+    }
     std::ofstream f(p, std::ios::app);
     if (!f) die("cannot open CSV file " + path);
     if (needs_header) f << kCsvHeader << "\n";
@@ -384,9 +415,10 @@ static int run(int argc, char** argv) {
 
     // ---- 3. Measured trials ---------------------------------------------
     int failures = 0;
-    for (int trial = 1; trial <= opt.trials; ++trial) {
+    for (int trial = opt.first_trial; trial < opt.first_trial + opt.trials; ++trial) {
         // >>> TIMED REGION START. Only encryption happens in here: no memory
         // allocation, no printing, no file access.
+        const auto start_wallclock = std::chrono::system_clock::now();   // for the CSV only
         const double cpu0 = process_cpu_seconds();
         const auto t0 = Clock::now();
         bool ok = true;
@@ -396,7 +428,9 @@ static int run(int argc, char** argv) {
         }
         const auto t1 = Clock::now();
         const double cpu1 = process_cpu_seconds();
-        // <<< TIMED REGION END.
+        const auto end_wallclock = std::chrono::system_clock::now();
+        // <<< TIMED REGION END. (The measured time comes from t0/t1 on the
+        // steady clock; the wall-clock readings only label when it happened.)
         if (!ok) die("an encryption call failed during the timed loop");
 
         const double wall = std::chrono::duration<double>(t1 - t0).count();
@@ -433,14 +467,16 @@ static int run(int argc, char** argv) {
         }
 
         char row[512];
-        std::snprintf(row, sizeof(row), "%s,%s,%s,%s,%d,%lld,%d,%.6f,%.6f,%.2f,%.3f,%.1f,%.1f,%s",
+        std::snprintf(row, sizeof(row), "%s,%s,%s,%s,%d,%lld,%d,%.6f,%.6f,%.2f,%.3f,%.1f,%.1f,%s,%s,%s",
                       utc_timestamp().c_str(), opt.label.c_str(), opt.cipher.c_str(),
                       ia32cap_value().c_str(), len, iterations, trial, wall, cpu, mbps,
-                      latency_us, cpu_util, peak_mb, verified ? "PASS" : "FAIL");
+                      latency_us, cpu_util, peak_mb, verified ? "PASS" : "FAIL",
+                      utc_timestamp_ms(start_wallclock).c_str(),
+                      utc_timestamp_ms(end_wallclock).c_str());
         append_csv(opt.out, row);
 
-        std::printf("  trial %2d/%d: %10.2f MB/s  %12.3f us/op  cpu %5.1f%%  peak %8.1f MB  verify %s\n",
-                    trial, opt.trials, mbps, latency_us, cpu_util, peak_mb,
+        std::printf("  trial %2d: %10.2f MB/s  %12.3f us/op  cpu %5.1f%%  peak %8.1f MB  verify %s\n",
+                    trial, mbps, latency_us, cpu_util, peak_mb,
                     verified ? "PASS" : "FAIL");
     }
 
