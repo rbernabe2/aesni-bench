@@ -1,8 +1,16 @@
-# Build output (CMake presets put everything under build/)
+# Build output. CMake presets put everything in %LOCALAPPDATA%\aesni-bench\build,
+# but ignore the usual locations too in case someone builds inside the repo.
 build/
 out/
 .vs/
 CMakeUserPresets.json
+vcpkg_installed/
+*.exe
+*.obj
+*.pdb
+*.ilk
+*.lib
+*.dll
 
 # Python
 __pycache__/
