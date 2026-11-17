@@ -2,6 +2,7 @@
 #
 #   .\scripts\demo.ps1            # pauses between sections (press Enter)
 #   .\scripts\demo.ps1 -NoPause   # runs straight through
+#   .\scripts\demo.ps1 -NoPause -NoOpen   # also don't open the graph (for testing)
 #
 # Sections:
 #   1. The switch: what OpenSSL sees with and without OPENSSL_ia32cap
@@ -13,7 +14,7 @@
 #
 # Demo output goes to results\demo\ (new timestamped files, never the
 # experiment data). Requires a Release build (scripts\build.ps1).
-param([switch]$NoPause)
+param([switch]$NoPause, [switch]$NoOpen)
 
 . "$PSScriptRoot\common.ps1"
 $ErrorActionPreference = 'Continue'
@@ -42,11 +43,16 @@ Section "1. The switch: OPENSSL_ia32cap" @(
     "OPENSSL_ia32cap lets us hide some of them. Our 'AES-NI off' mask hides",
     "AES-NI, PCLMULQDQ, VAES and VPCLMULQDQ - and nothing else.",
     "Below: the capability words OpenSSL actually uses (watch the first two numbers).")
+function Show-CpuInfo([string]$label) {
+    $words = (cmd /c "`"$OpenSslExe`" version -a 2>&1") | Where-Object { $_ -match '^CPUINFO' } |
+        ForEach-Object { ($_ -replace 'CPUINFO: OPENSSL_ia32cap=', '') -replace ' env:.*$', '' }
+    Write-Host "  $label  $words"
+}
+Set-Ia32Cap $null;       Show-CpuInfo 'AES-NI ON :'
+Set-Ia32Cap $AesNiMask;  Show-CpuInfo 'AES-NI OFF:'
 Set-Ia32Cap $null
-Write-Host "  AES-NI ON : " -NoNewline; (cmd /c "`"$OpenSslExe`" version -a 2>&1") | Where-Object { $_ -match '^CPUINFO' } | ForEach-Object { $_ -replace 'CPUINFO: OPENSSL_ia32cap=', '' }
-Set-Ia32Cap $AesNiMask
-Write-Host "  AES-NI OFF: " -NoNewline; (cmd /c "`"$OpenSslExe`" version -a 2>&1") | Where-Object { $_ -match '^CPUINFO' } | ForEach-Object { $_ -replace 'CPUINFO: OPENSSL_ia32cap=', '' }
-Set-Ia32Cap $null
+Write-Host "  (word 1: ...fed8...0b -> ...fcd8...09 = AES-NI + PCLMULQDQ hidden;" -ForegroundColor Gray
+Write-Host "   word 2: ...5fc6... -> ...59c6... = VAES + VPCLMULQDQ hidden)" -ForegroundColor Gray
 Pause-Demo
 
 # ---- 2 ---------------------------------------------------------------------------
@@ -110,6 +116,6 @@ Pause-Demo
 Section "6. Quick graph" @("analysis\demo_plot.py draws this run's CSV.")
 $png = [IO.Path]::ChangeExtension($csv, '.png')
 py "$RepoRoot\analysis\demo_plot.py" $csv $png
-if (Test-Path $png) { Write-Host "  Saved $png"; Start-Process $png }
+if (Test-Path $png) { Write-Host "  Saved $png"; if (-not $NoOpen) { Start-Process $png } }
 
 Write-Host ("`nDemo finished in {0:N0} s. Data: {1}" -f ((Get-Date) - $demoStart).TotalSeconds, $csv) -ForegroundColor Cyan
