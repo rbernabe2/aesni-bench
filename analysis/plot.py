@@ -493,6 +493,24 @@ def markdown(paths, s, sp, ot, ref):
         md.append(f"| {r['comparison']} | {size_label(r['size_bytes'])} | {r['n_rounds']} | {fmt(r['mean_ratio'], 3)} | "
                   f"{fmt(r['sd_ratio'], 3)} | {fmt(r['ci95_low'], 3)} – {fmt(r['ci95_high'], 3)} | "
                   f"{fmt(r['min_ratio'], 3)} | {fmt(r['max_ratio'], 3)} |")
+    md += ["", "## Per-message overhead estimate (two-point fit)", "",
+           "Model: latency = fixed cost per message + cost per byte × size, fitted exactly through the "
+           "16 KB and 256 KB mean latencies (both small enough to stay in cache). The 1 KB column checks "
+           "how well that model predicts the measured 1 KB latency. 'Break-even size' = fixed cost ÷ cost "
+           "per byte: below it, more than half of each message's time is per-message overhead.", "",
+           "| Config | Fixed cost per message (µs) | Cost per byte (ns) | Implied streaming MB/s | "
+           "Predicted 1 KB latency (µs) | Measured 1 KB latency (µs) | Break-even size (bytes) |",
+           "|---|---|---|---|---|---|---|"]
+    for cfg in [c for c in CONFIGS if c in set(s["config_label"])]:
+        d = s[s["config_label"] == cfg].set_index("size_bytes")
+        if not {16384, 262144, 1024} <= set(d.index):
+            continue
+        l16, l256 = d.loc[16384, "mean_latency_us"], d.loc[262144, "mean_latency_us"]
+        per_byte_us = (l256 - l16) / (262144 - 16384)
+        fixed_us = l16 - per_byte_us * 16384
+        md.append(f"| {cfg} | {fixed_us:.3f} | {per_byte_us * 1000:.4f} | {1 / per_byte_us:,.0f} | "
+                  f"{fixed_us + per_byte_us * 1024:.3f} | {d.loc[1024, 'mean_latency_us']:.3f} | "
+                  f"{fixed_us / per_byte_us:,.0f} |")
     md += ["", "## Our harness vs `openssl speed` (same libcrypto DLL)", ""]
     if ot is None or ot.empty:
         md.append("No openssl_speed_*.csv found - run scripts/openssl_speed.ps1.")
