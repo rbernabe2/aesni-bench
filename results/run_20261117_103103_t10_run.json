@@ -1,0 +1,25 @@
+﻿{
+    "started":  "2026-11-17T10:31:12.3228109-08:00",
+    "ended":  "2026-11-17T10:46:06.5479447-08:00",
+    "trials":  10,
+    "sizes":  [
+                  "1KB",
+                  "16KB",
+                  "256KB",
+                  "1MB",
+                  "64MB",
+                  "1GB"
+              ],
+    "configs":  [
+                    "aesni_on",
+                    "aesni_off",
+                    "chacha_on",
+                    "chacha_masked_control"
+                ],
+    "order":  "interleaved by round, config order rotated each round",
+    "pin":  -1,
+    "min_seconds":  1,
+    "cooldown_seconds":  30,
+    "armoury_mode":  "Performance",
+    "aesni_off_mask":  "~0x200000200000000:~0x60000000000:~0x0"
+}

@@ -1,0 +1,18 @@
+﻿# command: openssl speed -seconds 3 -evp aes-256-gcm -aead
+# OPENSSL_ia32cap: ~0x200000200000000:~0x60000000000:~0x0
+# OpenSSL 3.6.5 29 Sep 2026 (Library: OpenSSL 3.6.5 29 Sep 2026)
+# CPUINFO: OPENSSL_ia32cap=0xfcd83209078bffff:0x004059c6f1bf97a9:0x0000002000000010:0x0000000000000000:0x0000000000000000 env:~0x200000200000000:~0x60000000000:~0x0
+Doing AES-256-GCM ops for 3s on 2 size blocks: 3090505 AES-256-GCM ops in 2.97s
+Doing AES-256-GCM ops for 3s on 31 size blocks: 2384076 AES-256-GCM ops in 2.94s
+Doing AES-256-GCM ops for 3s on 136 size blocks: 1647910 AES-256-GCM ops in 3.02s
+Doing AES-256-GCM ops for 3s on 1024 size blocks: 463854 AES-256-GCM ops in 2.95s
+Doing AES-256-GCM ops for 3s on 8192 size blocks: 64632 AES-256-GCM ops in 2.97s
+Doing AES-256-GCM ops for 3s on 16384 size blocks: 32919 AES-256-GCM ops in 3.00s
+version: 3.6.5
+built on: Fri Oct 30 00:08:11 2026 UTC
+options: bn(64,64)
+compiler: C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\Hostx64\\x64\\cl.exe /Zi /Fdossl_static.pdb /GF /Gy /MD -nologo -DWIN32 -D_WINDOWS -utf-8 -MP  -MD -O2 -Oi -Gy -DNDEBUG -Z7 -DL_ENDIAN -DOPENSSL_PIC -D"OPENSSL_BUILDING_OPENSSL" -D"OPENSSL_SYS_WIN32" -D"WIN32_LEAN_AND_MEAN" -D"UNICODE" -D"_UNICODE" -D"_CRT_SECURE_NO_DEPRECATE" -D"_WINSOCK_DEPRECATED_NO_WARNINGS" -D"NDEBUG"
+CPUINFO: OPENSSL_ia32cap=0xfcd83209078bffff:0x004059c6f1bf97a9:0x0000002000000010:0x0000000000000000:0x0000000000000000 env:~0x200000200000000:~0x60000000000:~0x0
+The 'numbers' are in 1000s of bytes per second processed.
+type              2 bytes     31 bytes    136 bytes   1024 bytes   8192 bytes  16384 bytes
+AES-256-GCM       2082.02k    25159.61k    74318.18k   160841.99k   178346.22k   179781.63k
