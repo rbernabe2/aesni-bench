@@ -333,7 +333,7 @@ def fig_variability(df, out_png, note):
 def fig_resources(s, out_png, note):
     cfgs = [c for c in CONFIGS if c in set(s["config_label"])]
     sizes = sorted(s["size_bytes"].unique())
-    header = ["Size"] + [f"{SHORT[c]}\nCPU % (mean ± sd)" for c in cfgs] + ["Peak memory MB\n(max over all configs)"]
+    header = ["Size"] + [f"{SHORT[c]}\nCPU % (mean ± sd)" for c in cfgs] + ["Peak memory\nMB (max)"]
     rows = []
     for size in sizes:
         d = s[s["size_bytes"] == size].set_index("config_label")
@@ -348,6 +348,7 @@ def fig_resources(s, out_png, note):
     t = ax.table(cellText=rows, colLabels=header, loc="center", cellLoc="center", colLoc="center")
     t.auto_set_font_size(False)
     t.set_fontsize(10.5)
+    t.auto_set_column_width(list(range(len(header))))   # widen columns to fit their text
     t.scale(1, 2.0)
     for (r, _), cell in t.get_celld().items():
         cell.set_edgecolor(GRID)
@@ -410,11 +411,12 @@ def fig_vs_openssl(t, ref, out_png, note):
         ax.set_title(f"{size_label(size)} messages", color=INK)
         ax.yaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(lambda v, _: f"{v:,.0f}"))
         style_axes(ax)
-    axes[0].legend(frameon=False, loc="upper center", bbox_to_anchor=(1.1, -0.17), ncol=3)
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, labels, frameon=False, loc="lower center", ncol=3, bbox_to_anchor=(0.5, 0.03))
     fig.suptitle(f"Our harness vs. OpenSSL's own benchmark (same libcrypto DLL) · {note}\nreference: {ref}",
                  color=INK, fontsize=11)
     footnote(fig, "At 1 KB the tools time different per-message work (see docs/SPEED_COMPARISON.md); compare at 16 KB.")
-    fig.tight_layout(rect=(0, 0.04, 1, 0.95))
+    fig.tight_layout(rect=(0, 0.1, 1, 0.94))
     fig.savefig(out_png)
     plt.close(fig)
 
@@ -429,8 +431,9 @@ def fig_drift(df, out_png, note):
     cfgs = [c for c in CONFIGS if c in set(d["config_label"])]
     ncol = 3
     nrow = math.ceil(len(sizes) / ncol)
-    fig, axes = plt.subplots(nrow, ncol, figsize=(13, 3.6 * nrow), sharey=True)
+    fig, axes = plt.subplots(nrow, ncol, figsize=(13, 3.4 * nrow + 1.2), sharey=True)
     axes = np.atleast_1d(axes).ravel()
+    rounds = sorted(d["trial"].unique())
     for ax, size in zip(axes, sizes):
         for cfg in cfgs:
             g = d[(d["size_bytes"] == size) & (d["config_label"] == cfg)].sort_values("trial")
@@ -439,16 +442,18 @@ def fig_drift(df, out_png, note):
                     linewidth=1.5, markersize=5, label=st["label"])
         ax.axhline(100, color=INK, linewidth=0.8)
         ax.set_title(size_label(int(size)), color=INK)
+        ax.set_xticks(rounds)
         ax.set_xlabel("Round (time →)", color=INK)
         style_axes(ax)
     for ax in axes[::ncol]:
         ax.set_ylabel("% of config mean", color=INK)
     for ax in axes[len(sizes):]:
         ax.axis("off")
-    axes[0].legend(frameon=False, loc="upper center", bbox_to_anchor=(1.7, -0.25 - 1.0 * (nrow - 1)), ncol=2)
-    fig.suptitle("Drift check: throughput of each round relative to its configuration's mean · " + note,
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, labels, frameon=False, loc="lower center", ncol=2)   # one shared legend at the bottom
+    fig.suptitle("Drift check: each round's throughput as % of its configuration's mean\n" + note,
                  color=INK, fontsize=11)
-    fig.tight_layout(rect=(0, 0.06, 1, 0.96))
+    fig.tight_layout(rect=(0, 0.1, 1, 0.95))
     fig.savefig(out_png)
     plt.close(fig)
 
