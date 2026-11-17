@@ -5,10 +5,12 @@
 #
 # Everything here is read from the machine at the moment the script runs,
 # except the Armoury Crate mode, which Windows does not expose - pass it with
-# -ArmouryMode (it is written as "NOT RECORDED" otherwise).
+# -ArmouryMode (it is written as "NOT RECORDED" otherwise) - and optional
+# -Notes lines describing the conditions of one particular run.
 param(
     [string]$OutFile = '',
-    [string]$ArmouryMode = ''
+    [string]$ArmouryMode = '',
+    [string[]]$Notes = @()
 )
 
 . "$PSScriptRoot\common.ps1"
@@ -89,6 +91,7 @@ Every value below was read from the machine by the script.
 | Armoury Crate mode | $(if ($ArmouryMode) { $ArmouryMode } else { 'NOT RECORDED (pass -ArmouryMode)' }) |
 | Time since last restart | $([math]::Floor($uptime.TotalHours)) h $($uptime.Minutes) min |
 
+$(if ($Notes) { "## Run conditions`n`n" + (($Notes | ForEach-Object { "- $_" }) -join "`n") + "`n" })
 ## Software
 
 | Item | Value |
