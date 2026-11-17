@@ -1,0 +1,365 @@
+===== ROUND 1 2026-11-17T10:55:07.2674762-08:00 order: 256KB|chacha_on, 64MB|chacha_on, 256KB|aesni_on, 1GB|aesni_off, 64MB|aesni_on, 64MB|aesni_off, 1GB|chacha_on, 1GB|aesni_on, 256KB|aesni_off
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=chacha_on cipher=chacha20-poly1305 size=256KB (262144 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 1957 ops in 0.250 s -> 7828 iterations per trial
+  trial  1:    2054.83 MB/s       127.575 us/op  cpu  93.9%  peak      8.9 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=chacha_on cipher=chacha20-poly1305 size=64MB (67108864 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 7 ops in 0.254 s -> 28 iterations per trial
+  trial  1:    1957.34 MB/s     34285.829 us/op  cpu  99.3%  peak    136.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=aesni_on cipher=aes-256-gcm size=256KB (262144 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 6396 ops in 0.250 s -> 25583 iterations per trial
+  trial  1:    5593.45 MB/s        46.866 us/op  cpu  83.4%  peak      8.9 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : ~0x200000200000000:~0x60000000000:~0x0  (OpenSSL told to ignore the masked CPU features)
+Config          : label=aesni_off cipher=aes-256-gcm size=1GB (1073741824 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 1 ops in 5.918 s -> 1 iterations per trial
+  trial  1:     182.08 MB/s   5897081.300 us/op  cpu  98.3%  peak   2056.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=aesni_on cipher=aes-256-gcm size=64MB (67108864 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 26 ops in 0.259 s -> 101 iterations per trial
+  trial  1:    6592.42 MB/s     10179.695 us/op  cpu  98.8%  peak    136.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : ~0x200000200000000:~0x60000000000:~0x0  (OpenSSL told to ignore the masked CPU features)
+Config          : label=aesni_off cipher=aes-256-gcm size=64MB (67108864 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 1 ops in 0.365 s -> 3 iterations per trial
+  trial  1:     180.94 MB/s    370887.433 us/op  cpu  98.3%  peak    136.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=chacha_on cipher=chacha20-poly1305 size=1GB (1073741824 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 1 ops in 0.601 s -> 2 iterations per trial
+  trial  1:    1872.06 MB/s    573560.800 us/op  cpu  99.4%  peak   2056.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=aesni_on cipher=aes-256-gcm size=1GB (1073741824 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 2 ops in 0.355 s -> 6 iterations per trial
+  trial  1:    6075.39 MB/s    176736.233 us/op  cpu  98.7%  peak   2056.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : ~0x200000200000000:~0x60000000000:~0x0  (OpenSSL told to ignore the masked CPU features)
+Config          : label=aesni_off cipher=aes-256-gcm size=256KB (262144 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 169 ops in 0.250 s -> 676 iterations per trial
+  trial  1:     183.56 MB/s      1428.131 us/op  cpu  98.7%  peak      8.9 MB  verify PASS
+===== ROUND 2 2026-11-17T10:57:12.4237323-08:00 order: 256KB|aesni_on, 1GB|aesni_off, 256KB|chacha_on, 1GB|aesni_on, 1GB|chacha_on, 256KB|aesni_off, 64MB|chacha_on, 64MB|aesni_on, 64MB|aesni_off
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=aesni_on cipher=aes-256-gcm size=256KB (262144 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 6555 ops in 0.250 s -> 26217 iterations per trial
+  trial  2:    6788.53 MB/s        38.616 us/op  cpu  97.2%  peak      8.9 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : ~0x200000200000000:~0x60000000000:~0x0  (OpenSSL told to ignore the masked CPU features)
+Config          : label=aesni_off cipher=aes-256-gcm size=1GB (1073741824 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 1 ops in 6.134 s -> 1 iterations per trial
+  trial  2:     175.75 MB/s   6109482.900 us/op  cpu  98.5%  peak   2056.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=chacha_on cipher=chacha20-poly1305 size=256KB (262144 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 2001 ops in 0.250 s -> 8001 iterations per trial
+  trial  2:    2084.31 MB/s       125.770 us/op  cpu  99.4%  peak      8.9 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=aesni_on cipher=aes-256-gcm size=1GB (1073741824 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 2 ops in 0.342 s -> 6 iterations per trial
+  trial  2:    6224.41 MB/s    172504.950 us/op  cpu  98.1%  peak   2056.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=chacha_on cipher=chacha20-poly1305 size=1GB (1073741824 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 1 ops in 0.575 s -> 2 iterations per trial
+  trial  2:    1951.96 MB/s    550085.000 us/op  cpu  99.4%  peak   2056.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : ~0x200000200000000:~0x60000000000:~0x0  (OpenSSL told to ignore the masked CPU features)
+Config          : label=aesni_off cipher=aes-256-gcm size=256KB (262144 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 167 ops in 0.251 s -> 666 iterations per trial
+  trial  2:     182.13 MB/s      1439.333 us/op  cpu  92.9%  peak      8.9 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=chacha_on cipher=chacha20-poly1305 size=64MB (67108864 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 8 ops in 0.278 s -> 29 iterations per trial
+  trial  2:    2022.41 MB/s     33182.652 us/op  cpu 100.7%  peak    136.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=aesni_on cipher=aes-256-gcm size=64MB (67108864 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 25 ops in 0.257 s -> 98 iterations per trial
+  trial  2:    6734.67 MB/s      9964.687 us/op  cpu 100.8%  peak    136.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : ~0x200000200000000:~0x60000000000:~0x0  (OpenSSL told to ignore the masked CPU features)
+Config          : label=aesni_off cipher=aes-256-gcm size=64MB (67108864 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 1 ops in 0.392 s -> 3 iterations per trial
+  trial  2:     180.77 MB/s    371231.733 us/op  cpu  98.2%  peak    136.4 MB  verify PASS
+===== ROUND 3 2026-11-17T10:59:17.4832861-08:00 order: 256KB|chacha_on, 64MB|aesni_on, 256KB|aesni_on, 64MB|chacha_on, 1GB|chacha_on, 64MB|aesni_off, 1GB|aesni_on, 1GB|aesni_off, 256KB|aesni_off
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=chacha_on cipher=chacha20-poly1305 size=256KB (262144 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 1953 ops in 0.250 s -> 7811 iterations per trial
+  trial  3:    2002.93 MB/s       130.881 us/op  cpu  97.8%  peak      8.9 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=aesni_on cipher=aes-256-gcm size=64MB (67108864 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 25 ops in 0.256 s -> 98 iterations per trial
+  trial  3:    6592.34 MB/s     10179.819 us/op  cpu  95.5%  peak    136.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=aesni_on cipher=aes-256-gcm size=256KB (262144 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 6526 ops in 0.250 s -> 26104 iterations per trial
+  trial  3:    6852.54 MB/s        38.255 us/op  cpu 100.1%  peak      8.9 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=chacha_on cipher=chacha20-poly1305 size=64MB (67108864 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 8 ops in 0.264 s -> 31 iterations per trial
+  trial  3:    2042.14 MB/s     32861.987 us/op  cpu  99.7%  peak    136.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=chacha_on cipher=chacha20-poly1305 size=1GB (1073741824 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 1 ops in 0.598 s -> 2 iterations per trial
+  trial  3:    1894.15 MB/s    566871.850 us/op  cpu 100.6%  peak   2056.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : ~0x200000200000000:~0x60000000000:~0x0  (OpenSSL told to ignore the masked CPU features)
+Config          : label=aesni_off cipher=aes-256-gcm size=64MB (67108864 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 1 ops in 0.384 s -> 3 iterations per trial
+  trial  3:     182.42 MB/s    367890.200 us/op  cpu  97.7%  peak    136.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=aesni_on cipher=aes-256-gcm size=1GB (1073741824 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 2 ops in 0.340 s -> 6 iterations per trial
+  trial  3:    6320.88 MB/s    169872.150 us/op  cpu  96.6%  peak   2056.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : ~0x200000200000000:~0x60000000000:~0x0  (OpenSSL told to ignore the masked CPU features)
+Config          : label=aesni_off cipher=aes-256-gcm size=1GB (1073741824 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 1 ops in 6.037 s -> 1 iterations per trial
+  trial  3:     179.47 MB/s   5982919.500 us/op  cpu  98.7%  peak   2056.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : ~0x200000200000000:~0x60000000000:~0x0  (OpenSSL told to ignore the masked CPU features)
+Config          : label=aesni_off cipher=aes-256-gcm size=256KB (262144 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 170 ops in 0.250 s -> 680 iterations per trial
+  trial  3:     185.62 MB/s      1412.259 us/op  cpu 100.9%  peak      8.9 MB  verify PASS
+===== ROUND 4 2026-11-17T11:01:22.0647069-08:00 order: 64MB|chacha_on, 256KB|chacha_on, 64MB|aesni_off, 1GB|aesni_off, 256KB|aesni_off, 256KB|aesni_on, 64MB|aesni_on, 1GB|aesni_on, 1GB|chacha_on
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=chacha_on cipher=chacha20-poly1305 size=64MB (67108864 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 8 ops in 0.272 s -> 30 iterations per trial
+  trial  4:    2033.00 MB/s     33009.703 us/op  cpu  99.4%  peak    136.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=chacha_on cipher=chacha20-poly1305 size=256KB (262144 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 1923 ops in 0.250 s -> 7691 iterations per trial
+  trial  4:    2056.85 MB/s       127.449 us/op  cpu  98.8%  peak      8.9 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : ~0x200000200000000:~0x60000000000:~0x0  (OpenSSL told to ignore the masked CPU features)
+Config          : label=aesni_off cipher=aes-256-gcm size=64MB (67108864 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 1 ops in 0.382 s -> 3 iterations per trial
+  trial  4:     184.37 MB/s    363994.133 us/op  cpu  98.7%  peak    136.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : ~0x200000200000000:~0x60000000000:~0x0  (OpenSSL told to ignore the masked CPU features)
+Config          : label=aesni_off cipher=aes-256-gcm size=1GB (1073741824 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 1 ops in 5.922 s -> 1 iterations per trial
+  trial  4:     182.17 MB/s   5894189.900 us/op  cpu  98.3%  peak   2056.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : ~0x200000200000000:~0x60000000000:~0x0  (OpenSSL told to ignore the masked CPU features)
+Config          : label=aesni_off cipher=aes-256-gcm size=256KB (262144 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 170 ops in 0.250 s -> 680 iterations per trial
+  trial  4:     183.41 MB/s      1429.297 us/op  cpu  99.7%  peak      8.9 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=aesni_on cipher=aes-256-gcm size=256KB (262144 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 6364 ops in 0.250 s -> 25454 iterations per trial
+  trial  4:    6877.45 MB/s        38.116 us/op  cpu  99.8%  peak      8.9 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=aesni_on cipher=aes-256-gcm size=64MB (67108864 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 26 ops in 0.260 s -> 101 iterations per trial
+  trial  4:    6728.70 MB/s      9973.529 us/op  cpu  99.3%  peak    136.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=aesni_on cipher=aes-256-gcm size=1GB (1073741824 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 2 ops in 0.343 s -> 6 iterations per trial
+  trial  4:    6353.77 MB/s    168992.967 us/op  cpu  98.6%  peak   2056.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=chacha_on cipher=chacha20-poly1305 size=1GB (1073741824 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 1 ops in 0.575 s -> 2 iterations per trial
+  trial  4:    1973.33 MB/s    544128.000 us/op  cpu  97.6%  peak   2056.4 MB  verify PASS
+===== ROUND 5 2026-11-17T11:03:26.3292844-08:00 order: 64MB|aesni_on, 1GB|aesni_off, 1GB|chacha_on, 64MB|chacha_on, 256KB|aesni_off, 256KB|chacha_on, 64MB|aesni_off, 1GB|aesni_on, 256KB|aesni_on
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=aesni_on cipher=aes-256-gcm size=64MB (67108864 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 25 ops in 0.255 s -> 99 iterations per trial
+  trial  5:    6571.50 MB/s     10212.110 us/op  cpu 100.5%  peak    136.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : ~0x200000200000000:~0x60000000000:~0x0  (OpenSSL told to ignore the masked CPU features)
+Config          : label=aesni_off cipher=aes-256-gcm size=1GB (1073741824 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 1 ops in 5.946 s -> 1 iterations per trial
+  trial  5:     182.92 MB/s   5870082.100 us/op  cpu  98.2%  peak   2056.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=chacha_on cipher=chacha20-poly1305 size=1GB (1073741824 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 1 ops in 0.547 s -> 2 iterations per trial
+  trial  5:    2042.17 MB/s    525784.150 us/op  cpu  98.1%  peak   2056.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=chacha_on cipher=chacha20-poly1305 size=64MB (67108864 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 8 ops in 0.262 s -> 31 iterations per trial
+  trial  5:    2005.39 MB/s     33464.187 us/op  cpu  99.4%  peak    136.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : ~0x200000200000000:~0x60000000000:~0x0  (OpenSSL told to ignore the masked CPU features)
+Config          : label=aesni_off cipher=aes-256-gcm size=256KB (262144 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 175 ops in 0.251 s -> 697 iterations per trial
+  trial  5:     183.98 MB/s      1424.836 us/op  cpu  96.0%  peak      8.9 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=chacha_on cipher=chacha20-poly1305 size=256KB (262144 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 1953 ops in 0.250 s -> 7810 iterations per trial
+  trial  5:    2060.04 MB/s       127.252 us/op  cpu  99.0%  peak      8.9 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : ~0x200000200000000:~0x60000000000:~0x0  (OpenSSL told to ignore the masked CPU features)
+Config          : label=aesni_off cipher=aes-256-gcm size=64MB (67108864 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 1 ops in 0.360 s -> 3 iterations per trial
+  trial  5:     177.15 MB/s    378826.567 us/op  cpu  96.2%  peak    136.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=aesni_on cipher=aes-256-gcm size=1GB (1073741824 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 2 ops in 0.332 s -> 7 iterations per trial
+  trial  5:    6503.90 MB/s    165091.971 us/op  cpu  98.7%  peak   2056.4 MB  verify PASS
+OpenSSL version : OpenSSL 3.6.5 29 Sep 2026
+Build type      : Release
+CPU features    : AES-NI=yes PCLMULQDQ=yes VAES=yes VPCLMULQDQ=yes AVX-512F=yes
+OPENSSL_ia32cap : unset (OpenSSL may use AES-NI)
+Config          : label=aesni_on cipher=aes-256-gcm size=256KB (262144 bytes) trials=1
+Plaintext start : 576af644d1a7c8fe... (same in every config)
+Warm-up         : 6633 ops in 0.250 s -> 26530 iterations per trial
+  trial  5:    6825.76 MB/s        38.405 us/op  cpu  95.1%  peak      8.9 MB  verify PASS

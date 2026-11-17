@@ -1,0 +1,75 @@
+﻿{
+    "started":  "2026-11-17T10:55:07.2221447-08:00",
+    "ended":  "2026-11-17T11:05:32.7228686-08:00",
+    "rounds":  5,
+    "sizes":  [
+                  "256KB",
+                  "64MB",
+                  "1GB"
+              ],
+    "configs":  [
+                    "aesni_on",
+                    "aesni_off",
+                    "chacha_on"
+                ],
+    "cooldown_seconds":  10,
+    "min_seconds":  1,
+    "seed":  20261117,
+    "orders":  [
+                   [
+                       "256KB|chacha_on",
+                       "64MB|chacha_on",
+                       "256KB|aesni_on",
+                       "1GB|aesni_off",
+                       "64MB|aesni_on",
+                       "64MB|aesni_off",
+                       "1GB|chacha_on",
+                       "1GB|aesni_on",
+                       "256KB|aesni_off"
+                   ],
+                   [
+                       "256KB|aesni_on",
+                       "1GB|aesni_off",
+                       "256KB|chacha_on",
+                       "1GB|aesni_on",
+                       "1GB|chacha_on",
+                       "256KB|aesni_off",
+                       "64MB|chacha_on",
+                       "64MB|aesni_on",
+                       "64MB|aesni_off"
+                   ],
+                   [
+                       "256KB|chacha_on",
+                       "64MB|aesni_on",
+                       "256KB|aesni_on",
+                       "64MB|chacha_on",
+                       "1GB|chacha_on",
+                       "64MB|aesni_off",
+                       "1GB|aesni_on",
+                       "1GB|aesni_off",
+                       "256KB|aesni_off"
+                   ],
+                   [
+                       "64MB|chacha_on",
+                       "256KB|chacha_on",
+                       "64MB|aesni_off",
+                       "1GB|aesni_off",
+                       "256KB|aesni_off",
+                       "256KB|aesni_on",
+                       "64MB|aesni_on",
+                       "1GB|aesni_on",
+                       "1GB|chacha_on"
+                   ],
+                   [
+                       "64MB|aesni_on",
+                       "1GB|aesni_off",
+                       "1GB|chacha_on",
+                       "64MB|chacha_on",
+                       "256KB|aesni_off",
+                       "256KB|chacha_on",
+                       "64MB|aesni_off",
+                       "1GB|aesni_on",
+                       "256KB|aesni_on"
+                   ]
+               ]
+}
