@@ -90,7 +90,7 @@ correct for this comparison: SIMD is general-purpose hardware, while the
 mask removes only AES-specific hardware. So the comparison is "AES with its
 dedicated hardware vs ChaCha20 with ordinary vector hardware", plus "AES
 without its dedicated hardware". ChaCha20 sits in between: much faster than
-software AES, but about 3× slower than hardware AES on this CPU.
+software AES, but hardware AES-GCM is 2.61–3.49× faster than it on this CPU.
 
 ## 3. Small messages vs large data: where the curves change shape
 
