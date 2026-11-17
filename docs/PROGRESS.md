@@ -94,7 +94,7 @@ Source: `results/run_20261029_172841_t3_summary.md` (includes ± sd, latency, CP
 | 2026-11-17 | `docs/REPORT.md` final report | Both | Done | With embedded figures and individual contributions. |
 | 2026-11-17 | Live demo `scripts/demo.ps1` | Both | Done | Tested: 12/12 trials verified, 15 s without pauses (`results/demo/demo_20261117_111006.*`). |
 | 2026-11-17 | README: headline results + reproduction steps | Both | Done | |
-| 2026-11-17 | Final validation: clean build, tests, demo, numbers trace to CSVs | Both | See below | |
+| 2026-11-17 | Final validation: clean build, tests, demo, numbers trace to CSVs | Both | Done | Deleted the build folder, cloned the repo fresh, ran `build.ps1` (3/3 `ctest` pass) and `demo.ps1` (12/12 verified) from the clone. A script checked every decimal number in README / REPORT / ANALYSIS against `results/`: all found except two simple derived values (a CI half-width computed from the CI bounds, and 2 GiB ÷ 4 KiB = 524,288 pages). |
 | 2026-11-17 | Publish to GitHub (`rbernabe2/aesni-bench`) + tag v1.0 | Both | See below | |
 
 ### Open before presenting
